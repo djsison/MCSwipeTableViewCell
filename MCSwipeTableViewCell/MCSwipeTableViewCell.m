@@ -609,12 +609,14 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
             _contentScreenshotView.frame = frame;
             
             // Clearing the indicator view
-            _colorIndicatorView.backgroundColor = self.defaultColor;
+            //_colorIndicatorView.backgroundColor = self.defaultColor;
             
             _slidingView.alpha = 0;
             [self slideViewWithPercentage:0 view:_activeView isDragging:NO];
             
         } completion:^(BOOL finished) {
+            // Go back to default color when animation has finished.
+            _colorIndicatorView.backgroundColor = self.defaultColor;
             
             _isExited = NO;
             [self uninstallSwipingView];
@@ -636,7 +638,7 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
             [self slideViewWithPercentage:0 view:_activeView isDragging:NO];
             
             // Setting back the color to the default.
-            _colorIndicatorView.backgroundColor = self.defaultColor;
+            //_colorIndicatorView.backgroundColor = self.defaultColor;
             
         } completion:^(BOOL finished1) {
             
@@ -647,9 +649,11 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
                 _contentScreenshotView.frame = frame;
                 
                 // Clearing the indicator view
-                _colorIndicatorView.backgroundColor = [UIColor clearColor];
+                //_colorIndicatorView.backgroundColor = [UIColor clearColor];
                 
             } completion:^(BOOL finished2) {
+                // Clear color only when animation has finished.
+                _colorIndicatorView.backgroundColor = [UIColor clearColor];
                 
                 _isExited = NO;
                 [self uninstallSwipingView];
